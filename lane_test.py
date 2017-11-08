@@ -83,7 +83,6 @@ def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap):
     lines = cv2.HoughLinesP(img, rho, theta, threshold, np.array([]), minLineLength=min_line_len,
                             maxLineGap=max_line_gap)
     line_img = np.zeros((img.shape[0], img.shape[1], 3), dtype=np.uint8)
-    #draw_lines(line_img, lines, color=[0,0,255])
     return line_img, lines
 
 # Python 3 has support for cool math symbols.
@@ -190,8 +189,8 @@ class InvertedYCoordinateSystem:
         """
         Select the line segments that were detected by the Hough transform and bin them in the left lane
         or the right lane group (or no group if they don't meet certain conditions)
-        1. divide into potential left lane and right lane lines
-        2. prune horizontal slope lines
+        1. prune horizontal slope lines
+        2. divide into potential left lane and right lane lines according to the line slopes
         3. calculate weighted mean of left lane and right lane slopes
           (weights according to how low in the screen the lines are)
         4. if a slope of a line is too much off from the weighted mean, prune it away

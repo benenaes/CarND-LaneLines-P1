@@ -1,5 +1,5 @@
 ---
-typora-root-url: writeup
+
 ---
 
 # **Finding Lane Lines on the Road** 
@@ -29,23 +29,23 @@ The pipeline consists of the following steps:
 
 - Conversion to a grayscale image
 
-![blurred](/grayscale.jpg)
+![grayscale](./writeup/grayscale.jpg)
 
 - Apply Gaussian blur onto the grayscale image (kernel  = 5)
 
-![blurred](/blurred.jpg)
+![blurred](./writeup/blurred.jpg)
 
 - Apply adaptive Canny edge detection on the blurred image (low and high thresholds are automatically deduced using a fixed deviation from the median gray pixel value)
 
-![canny_edge](/canny_edge.jpg)
+![canny_edge](./writeup/canny_edge.jpg)
 
 - Calculate a trapezoid region of interest ('ROI') based on some fixed parameters and mask the Canny edge image with it
 
-![masked_roi](/masked_roi.jpg)
+![masked_roi](./writeup/masked_roi.jpg)
 
 - Apply a Hough transform on the masked image to get a set of line segments that are candidates for the left and right lane lines
 
-![hough_lines](/hough_lines.jpg)
+![hough_lines](./writeup/hough_lines.jpg)
 
 - Select which lines belong to the left and right lane lines based on the following actions:
   - prune horizontal slope lines
@@ -53,7 +53,7 @@ The pipeline consists of the following steps:
   - calculate weighted mean of left lane and right lane slopes (weights according to how low in the screen the lines are)
   - if a slope of a line is too much off from the weighted mean, prune it away
 
-  ![SelectedLeftAndRightLaneLines](/SelectedLeftAndRightLaneLines.jpg)
+  ![SelectedLeftAndRightLaneLines](./writeup/SelectedLeftAndRightLaneLines.jpg)
 
 
 - For each lane line: 
@@ -61,7 +61,7 @@ The pipeline consists of the following steps:
   - Draw a red line with given slope and intercept in the trapezoid ROI (using the top and bottom Y coordinates of the ROI)
 - Blend the original image with the image with red lane lines
 
-![Blended](/Blended.jpg)
+![Blended](./writeup/Blended.jpg)
 
 Some other noteworthy functions/classes are:
 
